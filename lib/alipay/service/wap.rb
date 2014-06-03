@@ -8,6 +8,10 @@ module Alipay
       REQ_DATA_REQUIRED_OPTIONS = %w( subject out_trade_no total_fee seller_account_name call_back_url )
       WAP_TRADE_REQUIRED_OPTIONS = %w( service format v partner req_id req_data )
 
+      def self.create_direct_pay_by_user_url
+        Alipay::Service::Wap.auth_and_execute(request_token: Alipay::Service::Wap.trade_create_direct_token({:req_data => options}))
+      end
+
       def self.trade_create_direct_token(options)
         options = Utils.stringify_keys(options)
 
